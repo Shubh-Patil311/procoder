@@ -69,11 +69,11 @@ function App() {
       case "home":
         return <Home setActiveSection={setActiveSection} />;
       case "about":
-        return <About />;
+        return <About setActiveSection={setActiveSection} />;
       case "services":
-        return <Services />;
+        return <Services setActiveSection={setActiveSection} />;
       case "placement":
-        return <Placement />;
+        return <Placement setActiveSection={setActiveSection} />;
       case "contact":
         return <Contact />;
       default:
