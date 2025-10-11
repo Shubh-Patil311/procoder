@@ -1,6 +1,21 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import {
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaPhone,
+  FaShareAlt,
+  FaLinkedin,
+  FaInstagram,
+  FaFacebook,
+  FaRocket,
+  FaPaperPlane,
+  FaClock,
+  FaUser,
+  FaMobile,
+  FaComment,
+} from "react-icons/fa";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -56,18 +71,42 @@ const Contact = () => {
   };
 
   const cardVariants = {
-    hidden: { scale: 0.9, opacity: 0 },
+    hidden: { scale: 0.9, opacity: 0, y: 20 },
     visible: {
       scale: 1,
       opacity: 1,
+      y: 0,
       transition: {
         type: "spring",
         stiffness: 100,
       },
     },
     hover: {
-      scale: 1.02,
-      y: -5,
+      scale: 1.05,
+      y: -10,
+      rotateZ: 1,
+      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+      transition: {
+        type: "spring",
+        stiffness: 400,
+      },
+    },
+  };
+
+  const iconVariants = {
+    hidden: { scale: 0, rotate: -180 },
+    visible: {
+      scale: 1,
+      rotate: 0,
+      transition: {
+        type: "spring",
+        stiffness: 200,
+        damping: 15,
+      },
+    },
+    hover: {
+      scale: 1.2,
+      rotate: 360,
       transition: {
         type: "spring",
         stiffness: 400,
@@ -76,7 +115,7 @@ const Contact = () => {
   };
 
   const floatingAnimation = {
-    y: [0, -10, 0],
+    y: [0, -15, 0],
     transition: {
       duration: 3,
       repeat: Infinity,
@@ -84,14 +123,70 @@ const Contact = () => {
     },
   };
 
+  const pulseAnimation = {
+    scale: [1, 1.1, 1],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+    },
+  };
+
   const socialPlatforms = [
-    { name: "LinkedIn", color: "from-blue-500 to-blue-600" },
-    { name: "Instagram", color: "from-pink-500 to-purple-600" },
-    { name: "Facebook", color: "from-blue-600 to-blue-700" },
+    {
+      name: "LinkedIn",
+      color: "from-blue-500 to-blue-600",
+      icon: FaLinkedin,
+      bgColor: "bg-gradient-to-br from-blue-500 to-blue-600",
+    },
+    {
+      name: "Instagram",
+      color: "from-pink-500 to-purple-600",
+      icon: FaInstagram,
+      bgColor: "bg-gradient-to-br from-pink-500 to-purple-600",
+    },
+    {
+      name: "Facebook",
+      color: "from-blue-600 to-blue-700",
+      icon: FaFacebook,
+      bgColor: "bg-gradient-to-br from-blue-600 to-blue-700",
+    },
   ];
 
+  const contactCards = [
+    {
+      title: "Office Address",
+      content:
+        "Office No.6, Ground Floor, S NO 147/10B+11, NANDAN PRIDE Building, opposite Karve statue, near Vritti Solutions, Kothrud, Pune - 411038",
+      icon: FaMapMarkerAlt,
+      color: "from-blue-500 to-cyan-600",
+      bgColor: "bg-gradient-to-br from-blue-500 to-cyan-600",
+    },
+    {
+      title: "Email Us",
+      content: "Procoderinfosystem@gmail.com",
+      icon: FaEnvelope,
+      color: "from-cyan-500 to-blue-600",
+      bgColor: "bg-gradient-to-br from-cyan-500 to-blue-600",
+      isEmail: true,
+    },
+    {
+      title: "Quick Response",
+      content: "We typically respond within 2 hours during business days",
+      icon: FaClock,
+      color: "from-green-500 to-emerald-600",
+      bgColor: "bg-gradient-to-br from-green-500 to-emerald-600",
+    },
+  ];
+
+  const formIcons = {
+    name: FaUser,
+    email: FaEnvelope,
+    phone: FaMobile,
+    message: FaComment,
+  };
+
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-green-50 via-teal-50 to-emerald-50">
+    <section className="py-20 px-4 bg-gradient-to-br from-gray-50 via-cyan-50 to-blue-50">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <motion.div
@@ -107,13 +202,13 @@ const Contact = () => {
             transition={{ duration: 0.5 }}
           >
             Let's Build Your{" "}
-            <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
               Career
             </span>{" "}
             Together!
           </motion.h1>
           <motion.div
-            className="w-32 h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto mb-8 rounded-full"
+            className="w-32 h-1.5 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto mb-8 rounded-full"
             initial={{ width: 0 }}
             animate={{ width: "8rem" }}
             transition={{ delay: 0.5, duration: 0.8 }}
@@ -139,242 +234,182 @@ const Contact = () => {
           {/* Contact Form */}
           <motion.div
             variants={itemVariants}
-            className="bg-white rounded-3xl shadow-2xl p-8 border border-emerald-100"
+            className="bg-white rounded-3xl shadow-2xl p-8 border border-blue-100 relative overflow-hidden"
           >
+            {/* Background Pattern */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-cyan-50 opacity-50"></div>
+
             <motion.h2
-              className="text-3xl font-bold text-gray-900 mb-8"
+              className="text-3xl font-bold text-gray-900 mb-8 relative z-10"
               variants={itemVariants}
             >
               Send us a Message
             </motion.h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <motion.div variants={itemVariants}>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 mb-3"
-                >
-                  Full Name
-                </label>
-                <motion.input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-4 border border-emerald-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300 bg-white/50 backdrop-blur-sm"
-                  placeholder="Enter your full name"
-                  whileFocus={{ scale: 1.02 }}
-                />
-              </motion.div>
-
-              <motion.div
-                className="grid md:grid-cols-2 gap-6"
-                variants={containerVariants}
-              >
-                <motion.div variants={itemVariants}>
+            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+              {["name", "email", "phone", "message"].map((field, index) => (
+                <motion.div key={field} variants={itemVariants}>
                   <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700 mb-3"
+                    htmlFor={field}
+                    className="block text-sm font-medium text-gray-700 mb-3 flex items-center"
                   >
-                    Email Address
+                    <motion.div className="mr-2" variants={iconVariants}>
+                      {React.createElement(formIcons[field], {
+                        className: "text-blue-500 text-lg",
+                      })}
+                    </motion.div>
+                    {field.charAt(0).toUpperCase() +
+                      field.slice(1).replace(/([A-Z])/g, " $1")}
                   </label>
-                  <motion.input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-4 border border-emerald-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300 bg-white/50 backdrop-blur-sm"
-                    placeholder="Enter your email"
-                    whileFocus={{ scale: 1.02 }}
-                  />
+                  {field === "message" ? (
+                    <motion.textarea
+                      id={field}
+                      name={field}
+                      value={formData[field]}
+                      onChange={handleChange}
+                      required
+                      rows="5"
+                      className="w-full px-4 py-4 border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white/70 backdrop-blur-sm resize-none pl-12"
+                      placeholder={`Tell us about your ${
+                        field === "message" ? "requirements" : field
+                      }...`}
+                      whileFocus={{ scale: 1.02 }}
+                    />
+                  ) : (
+                    <div className="relative">
+                      <motion.input
+                        type={
+                          field === "email"
+                            ? "email"
+                            : field === "phone"
+                            ? "tel"
+                            : "text"
+                        }
+                        id={field}
+                        name={field}
+                        value={formData[field]}
+                        onChange={handleChange}
+                        required={field !== "phone"}
+                        className="w-full px-4 py-4 border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 bg-white/70 backdrop-blur-sm pl-12"
+                        placeholder={`Enter your ${field}`}
+                        whileFocus={{ scale: 1.02 }}
+                      />
+                    </div>
+                  )}
                 </motion.div>
-
-                <motion.div variants={itemVariants}>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-gray-700 mb-3"
-                  >
-                    Phone Number
-                  </label>
-                  <motion.input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-4 border border-emerald-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300 bg-white/50 backdrop-blur-sm"
-                    placeholder="Enter your phone number"
-                    whileFocus={{ scale: 1.02 }}
-                  />
-                </motion.div>
-              </motion.div>
-
-              <motion.div variants={itemVariants}>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 mb-3"
-                >
-                  Message
-                </label>
-                <motion.textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows="5"
-                  className="w-full px-4 py-4 border border-emerald-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-300 bg-white/50 backdrop-blur-sm resize-none"
-                  placeholder="Tell us about your requirements..."
-                  whileFocus={{ scale: 1.02 }}
-                ></motion.textarea>
-              </motion.div>
+              ))}
 
               <motion.button
                 type="submit"
-                className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="w-full bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-600 hover:to-cyan-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl group relative overflow-hidden"
                 whileHover={{
                   scale: 1.02,
-                  boxShadow: "0 20px 40px rgba(16, 185, 129, 0.3)",
+                  boxShadow: "0 20px 40px rgba(37, 99, 235, 0.3)",
                 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Send Message
+                <span className="flex items-center justify-center space-x-2 relative z-10">
+                  <span>Send Message</span>
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <FaPaperPlane className="text-white" />
+                  </motion.span>
+                </span>
+
+                {/* Button background animation */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-500 opacity-0 group-hover:opacity-100"
+                  transition={{ duration: 0.3 }}
+                />
               </motion.button>
             </form>
+
+            {/* Floating elements */}
+            <motion.div
+              className="absolute top-4 right-4 w-3 h-3 bg-blue-400 rounded-full"
+              animate={pulseAnimation}
+            />
+            <motion.div
+              className="absolute bottom-4 left-4 w-2 h-2 bg-cyan-400 rounded-full"
+              animate={{
+                ...pulseAnimation,
+                scale: [1, 1.5, 1],
+              }}
+            />
           </motion.div>
 
           {/* Contact Information */}
           <motion.div variants={itemVariants} className="space-y-8">
-            {/* Office Address */}
-            <motion.div
-              variants={cardVariants}
-              whileHover="hover"
-              className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden"
-            >
-              {/* Background Pattern */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full"></div>
-                <div className="absolute bottom-4 left-4 w-6 h-6 bg-white rounded-full"></div>
-              </div>
-
-              <div className="flex items-start space-x-4 relative z-10">
-                <motion.div
-                  className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0 backdrop-blur-sm"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <svg
-                    className="w-7 h-7 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </motion.div>
-                <div>
-                  <h3 className="text-2xl font-bold mb-3">Office Address</h3>
-                  <p className="text-emerald-50 leading-relaxed text-lg">
-                    Office No.6, Ground Floor, S NO 147/10B+11,
-                    <br />
-                    NANDAN PRIDE Building, opposite Karve statue,
-                    <br />
-                    near Vritti Solutions, Kothrud,
-                    <br />
-                    Pune - 411038
-                  </p>
-                </div>
-              </div>
-
-              {/* Floating Element */}
+            {contactCards.map((card, index) => (
               <motion.div
-                className="absolute top-6 right-6 w-4 h-4 bg-white/30 rounded-full"
-                animate={floatingAnimation}
-              />
-            </motion.div>
-
-            {/* Email */}
-            <motion.div
-              variants={cardVariants}
-              whileHover="hover"
-              className="bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden"
-            >
-              {/* Background Pattern */}
-              <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-6 left-6 w-5 h-5 bg-white rounded-full"></div>
-              </div>
-
-              <div className="flex items-start space-x-4 relative z-10">
-                <motion.div
-                  className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0 backdrop-blur-sm"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <svg
-                    className="w-7 h-7 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                </motion.div>
-                <div>
-                  <h3 className="text-2xl font-bold mb-3">Email Us</h3>
-                  <motion.a
-                    href="mailto:Procoderinfosystem@gmail.com"
-                    className="text-white text-lg font-medium hover:text-emerald-100 transition-colors duration-300 border-b-2 border-transparent hover:border-white"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    Procoderinfosystem@gmail.com
-                  </motion.a>
+                key={index}
+                variants={cardVariants}
+                whileHover="hover"
+                className={`${card.bgColor} rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden group cursor-pointer`}
+              >
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-10">
+                  <div className="absolute top-4 right-4 w-8 h-8 bg-white rounded-full"></div>
+                  <div className="absolute bottom-4 left-4 w-6 h-6 bg-white rounded-full"></div>
                 </div>
-              </div>
 
-              {/* Floating Element */}
-              <motion.div
-                className="absolute bottom-6 right-6 w-3 h-3 bg-white/40 rounded-full"
-                animate={{
-                  ...floatingAnimation,
-                  y: [0, -8, 0],
-                }}
-              />
-            </motion.div>
+                <div className="flex items-start space-x-4 relative z-10">
+                  <motion.div
+                    className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0 backdrop-blur-sm"
+                    variants={iconVariants}
+                    whileHover="hover"
+                  >
+                    <card.icon className="w-7 h-7 text-white" />
+                  </motion.div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-3">{card.title}</h3>
+                    {card.isEmail ? (
+                      <motion.a
+                        href={`mailto:${card.content}`}
+                        className="text-blue-50 leading-relaxed text-lg hover:text-cyan-100 transition-colors duration-300 border-b-2 border-transparent hover:border-white"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        {card.content}
+                      </motion.a>
+                    ) : (
+                      <p className="text-blue-50 leading-relaxed text-lg">
+                        {card.content}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Floating Element */}
+                <motion.div
+                  className="absolute top-6 right-6 w-4 h-4 bg-white/30 rounded-full"
+                  animate={floatingAnimation}
+                />
+              </motion.div>
+            ))}
 
             {/* Social Media */}
             <motion.div
               variants={cardVariants}
               whileHover="hover"
-              className="bg-white rounded-3xl p-8 shadow-2xl border border-emerald-100"
+              className="bg-white rounded-3xl p-8 shadow-2xl border border-blue-100 relative overflow-hidden"
             >
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+              <motion.h3
+                className="text-2xl font-bold text-gray-900 mb-6 flex items-center"
+                variants={itemVariants}
+              >
+                <motion.div className="mr-3" variants={iconVariants}>
+                  <FaShareAlt className="text-blue-500 text-2xl" />
+                </motion.div>
                 Follow Us
-              </h3>
+              </motion.h3>
+
               <div className="grid grid-cols-3 gap-4">
                 {socialPlatforms.map((platform, index) => (
                   <motion.a
                     key={platform.name}
                     href="#"
-                    className={`bg-gradient-to-r ${platform.color} text-white font-semibold py-4 px-4 rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300`}
+                    className={`${platform.bgColor} text-white font-semibold py-4 px-4 rounded-xl text-center shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden`}
                     whileHover={{
                       scale: 1.05,
                       y: -2,
@@ -384,40 +419,38 @@ const Contact = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 + 0.5 }}
                   >
-                    {platform.name}
+                    <span className="flex flex-col items-center space-y-2 relative z-10">
+                      <platform.icon className="text-xl" />
+                      <span className="text-sm">{platform.name}</span>
+                    </span>
+
+                    {/* Hover overlay */}
+                    <motion.div
+                      className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100"
+                      transition={{ duration: 0.3 }}
+                    />
                   </motion.a>
                 ))}
               </div>
 
               {/* Additional Info */}
               <motion.div
-                className="mt-6 p-4 bg-emerald-50 rounded-xl border border-emerald-200"
+                className="mt-6 p-4 bg-blue-50 rounded-xl border border-blue-200"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8 }}
               >
-                <p className="text-sm text-emerald-700 text-center">
+                <p className="text-sm text-blue-700 text-center">
                   Stay updated with our latest courses, placement opportunities,
                   and success stories!
                 </p>
               </motion.div>
-            </motion.div>
 
-            {/* Quick Contact Info */}
-            <motion.div
-              variants={cardVariants}
-              className="bg-gradient-to-br from-teal-500 to-cyan-600 rounded-3xl p-6 text-white text-center shadow-2xl"
-            >
-              <motion.h4
-                className="text-lg font-bold mb-2"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                ⚡ Quick Response
-              </motion.h4>
-              <p className="text-emerald-50">
-                We typically respond within 2 hours during business days
-              </p>
+              {/* Floating elements */}
+              <motion.div
+                className="absolute top-4 right-4 w-2 h-2 bg-blue-400 rounded-full"
+                animate={pulseAnimation}
+              />
             </motion.div>
           </motion.div>
         </motion.div>
@@ -430,11 +463,21 @@ const Contact = () => {
           viewport={{ once: true }}
           className="mt-20"
         >
-          <div className="bg-white rounded-3xl shadow-2xl p-8 border border-emerald-100">
-            <h3 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+          <div className="bg-white rounded-3xl shadow-2xl p-8 border border-blue-100 relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-cyan-50 opacity-30"></div>
+
+            <motion.h3
+              className="text-3xl font-bold text-gray-900 mb-6 text-center relative z-10 flex items-center justify-center"
+              variants={itemVariants}
+            >
+              <motion.div className="mr-3" variants={iconVariants}>
+                <FaMapMarkerAlt className="text-blue-500 text-2xl" />
+              </motion.div>
               Find Our Office
-            </h3>
-            <div className="rounded-2xl overflow-hidden shadow-lg">
+            </motion.h3>
+
+            <div className="rounded-2xl overflow-hidden shadow-lg relative z-10">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2995.3369178033063!2d73.81292227519121!3d18.502516982587565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sOffice%20Address%3A%20Office%20No.6%2C%20Ground%20Floor%2C%20S%20NO%20147%2F10B%2B11%2C%20NANDAN%20PRIDE%20Building%2C%20opposite%20Karve%20statue%2C%20near%20Vritti%20Solutions%2C%20Kothrud%2C%20Pune%20-%20411038!5e1!3m2!1sen!2sin!4v1760094187556!5m2!1sen!2sin"
                 width="100%"
@@ -448,18 +491,24 @@ const Contact = () => {
               ></iframe>
             </div>
             <motion.div
-              className="mt-6 text-center"
+              className="mt-6 text-center relative z-10"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              <p className="text-emerald-700 font-medium">
+              <p className="text-blue-700 font-medium">
                 Located in the heart of Kothrud, Pune
               </p>
               <p className="text-gray-600 text-sm mt-2">
                 Easy to find location near Karve statue
               </p>
             </motion.div>
+
+            {/* Floating elements */}
+            <motion.div
+              className="absolute top-8 left-8 w-3 h-3 bg-cyan-400 rounded-full"
+              animate={floatingAnimation}
+            />
           </div>
         </motion.div>
       </div>

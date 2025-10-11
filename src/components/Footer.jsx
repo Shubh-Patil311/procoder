@@ -37,7 +37,7 @@ const Footer = () => {
 
   return (
     <motion.footer
-      className="bg-gray-900 text-white py-12 border-t border-emerald-700"
+      className="bg-gray-900 text-white py-12 border-t border-blue-700"
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
       ref={ref}
@@ -49,7 +49,7 @@ const Footer = () => {
           <motion.div variants={itemVariants}>
             <div className="flex items-center space-x-3 mb-4">
               <motion.div
-                className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-green-600 rounded-lg flex items-center justify-center shadow-lg ring-2 ring-emerald-400/20"
+                className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-lg ring-2 ring-blue-400/20"
                 whileHover={{
                   rotate: 360,
                   scale: 1.1,
@@ -99,12 +99,12 @@ const Footer = () => {
                 <motion.li key={item} variants={itemVariants}>
                   <motion.a
                     href={`#${item.toLowerCase().replace(" ", "-")}`}
-                    className="text-gray-300 hover:text-emerald-400 transition-colors duration-300 flex items-center space-x-2 group"
+                    className="text-gray-300 hover:text-cyan-400 transition-colors duration-300 flex items-center space-x-2 group"
                     whileHover={{ x: 5 }}
                     transition={{ delay: index * 0.1 }}
                   >
                     <motion.span
-                      className="w-1.5 h-1.5 bg-emerald-500 rounded-full opacity-0 group-hover:opacity-100"
+                      className="w-1.5 h-1.5 bg-cyan-500 rounded-full opacity-0 group-hover:opacity-100"
                       whileHover={{ scale: 1.5 }}
                     />
                     <span>{item}</span>
@@ -132,7 +132,7 @@ const Footer = () => {
                 whileHover={{ x: 5 }}
               >
                 <motion.div
-                  className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center"
+                  className="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center"
                   whileHover={{ scale: 1.2, rotate: 360 }}
                   transition={{ duration: 0.5 }}
                 >
@@ -140,7 +140,7 @@ const Footer = () => {
                 </motion.div>
                 <motion.a
                   href="mailto:Procoderinfosystem@gmail.com"
-                  className="hover:text-emerald-400 transition-colors duration-300"
+                  className="hover:text-cyan-400 transition-colors duration-300"
                   whileHover={{ scale: 1.05 }}
                 >
                   Procoderinfosystem@gmail.com
@@ -152,13 +152,13 @@ const Footer = () => {
                 whileHover={{ x: 5 }}
               >
                 <motion.div
-                  className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center"
+                  className="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center"
                   whileHover={{ scale: 1.2, rotate: 360 }}
                   transition={{ duration: 0.5 }}
                 >
                   <span className="text-sm">📍</span>
                 </motion.div>
-                <span className="hover:text-emerald-400 transition-colors duration-300">
+                <span className="hover:text-cyan-400 transition-colors duration-300">
                   Pune, Maharashtra
                 </span>
               </motion.div>
