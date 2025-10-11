@@ -176,7 +176,7 @@ const Home = ({ setActiveSection }) => {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Coding Background */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative flex flex-col items-center justify-center overflow-hidden py-[6vh] md:py-[8vh] lg:py-[6vh]">
         {/* Coding Background Image with Animation */}
         <motion.div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
