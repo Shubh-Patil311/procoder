@@ -92,7 +92,7 @@ function App() {
         {/* Adjusted for compact header */}
         {renderSection()}
       </main>
-      <Footer />
+      <Footer setActiveSection={handleSectionChange} />
       <ScrollToTop />
     </div>
   );
