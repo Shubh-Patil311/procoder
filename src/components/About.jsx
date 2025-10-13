@@ -754,7 +754,7 @@ const About = ({ setActiveSection }) => {
       bgColor: "bg-gradient-to-br from-indigo-400 to-indigo-500",
     },
     {
-      number: "98%",
+      number: "100%",
       label: "Success Rate",
       color: "from-sky-400 to-sky-500",
       icon: FaChartLine,
