@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -24,6 +24,8 @@ export default function OurServices({ setActiveSection }) {
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
+
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const services = [
     {
@@ -83,10 +85,10 @@ export default function OurServices({ setActiveSection }) {
 
   const reputationData = [
     { institute: "ProCoder Infosystem", rating: 95 },
-    { institute: "Tech Academy", rating: 85 },
-    { institute: "SkillPro Institute", rating: 80 },
-    { institute: "CodeMasters", rating: 75 },
-    { institute: "InnovateIT", rating: 70 },
+    { institute: "Other Institute", rating: 85 },
+    { institute: "Other Institute", rating: 80 },
+    { institute: "Other Institute", rating: 75 },
+    { institute: "Other Institute", rating: 70 },
   ];
 
   // Function to navigate to contact section
@@ -183,24 +185,43 @@ export default function OurServices({ setActiveSection }) {
           Highlights
         </motion.h2>
 
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[1500px] mx-auto">
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[1500px] mx-auto">
           {highlights.map((item, idx) => (
             <motion.div
               key={idx}
-              className="relative w-full h-60 rounded-lg overflow-hidden shadow-lg cursor-pointer"
+              className="relative bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer group"
               whileHover={{ scale: 1.05 }}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <img
-                src={item.img}
-                alt={item.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center p-4 text-center">
-                <h3 className="text-white text-lg font-bold">{item.title}</h3>
-                <p className="text-white text-sm mt-2">{item.subtitle}</p>
+              {/* Image Container */}
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+
+                {/* Text overlay that appears at bottom on hover */}
+                <div
+                  className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white transform transition-all duration-300 ${
+                    hoveredIndex === idx
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-4 opacity-0"
+                  }`}
+                >
+                  <p className="text-sm opacity-90">{item.subtitle}</p>
+                </div>
+              </div>
+
+              {/* Title below image - always visible */}
+              <div className="p-4 text-center">
+                <h3 className="text-lg font-bold text-blue-900 mb-1">
+                  {item.title}
+                </h3>
               </div>
             </motion.div>
           ))}

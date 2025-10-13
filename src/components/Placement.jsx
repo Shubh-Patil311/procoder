@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -20,6 +20,8 @@ export default function PlacementSupport({ setActiveSection }) {
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
+
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const steps = [
     { title: "Registration & Career Counselling", icon: <FaClipboardList /> },
@@ -205,28 +207,58 @@ export default function PlacementSupport({ setActiveSection }) {
           </motion.button>
         </motion.div>
 
-        {/* Highlights Grid */}
-        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[1500px] mx-auto mt-12">
-          {highlights.map((item, idx) => (
-            <motion.div
-              key={idx}
-              className="relative w-full h-52 rounded-lg overflow-hidden shadow-lg cursor-pointer"
-              whileHover={{ scale: 1.05 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: idx * 0.05 }}
-            >
-              <img
-                src={item.img}
-                alt={item.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center p-2 text-center">
-                <h3 className="text-white text-lg font-bold">{item.title}</h3>
-                <p className="text-white text-sm mt-1">{item.subtitle}</p>
-              </div>
-            </motion.div>
-          ))}
+        {/* Highlights Grid with Title Below Image */}
+        <div className="max-w-[1500px] mx-auto mt-12">
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-900"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Why Choose Our Placement Support?
+          </motion.h2>
+
+          <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {highlights.map((item, idx) => (
+              <motion.div
+                key={idx}
+                className="relative bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer group"
+                whileHover={{ scale: 1.05 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.05 }}
+                onMouseEnter={() => setHoveredIndex(idx)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                {/* Image Container */}
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+
+                  {/* Text overlay that appears at bottom on hover */}
+                  <div
+                    className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white transform transition-all duration-300 ${
+                      hoveredIndex === idx
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-4 opacity-0"
+                    }`}
+                  >
+                    <p className="text-sm opacity-90">{item.subtitle}</p>
+                  </div>
+                </div>
+
+                {/* Title below image - always visible */}
+                <div className="p-4 text-center">
+                  <h3 className="text-lg font-bold text-blue-900 mb-1">
+                    {item.title}
+                  </h3>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

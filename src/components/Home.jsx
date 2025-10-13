@@ -587,7 +587,7 @@ import {
 const Home = ({ setActiveSection }) => {
   const highlights = [
     {
-      text: "Direct Placements in top IT companies",
+      text: "Guaranteed Job Placement Assistance",
       icon: FaBriefcase,
       color: "from-blue-500 to-cyan-500",
     },
@@ -992,7 +992,7 @@ const Home = ({ setActiveSection }) => {
           >
             {[
               { number: "500+", label: "Students Trained", icon: FaUsers },
-              { number: "95%", label: "Placement Rate", icon: FaCheckCircle },
+              { number: "100%", label: "Placement Rate", icon: FaCheckCircle },
               { number: "50+", label: "Partner Companies", icon: FaBriefcase },
               {
                 number: "100%",
