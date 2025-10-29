@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -19,65 +19,69 @@ import {
   CartesianGrid,
 } from "recharts";
 
+// ✅ Local image imports following naming convention
+import servicesbg from "../assets/ourserviceheading.jpg";
+import placement1 from "../assets/ourservice1.jpeg";
+import placement2 from "../assets/ourservice2.jpeg";
+import placement3 from "../assets/ourservice3.jpeg";
+import placement4 from "../assets/ourservice4.jpeg";
+
 export default function OurServices({ setActiveSection }) {
-  // Add setActiveSection prop here
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
-
-  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const services = [
     {
       title: "Direct Placements",
       text: "We collaborate with reputed IT companies to offer direct job placement opportunities for deserving candidates.",
       icon: <FaHandshake />,
-      bg: "https://images.unsplash.com/photo-1581091215365-3a818a2a02b8?auto=format&fit=crop&w=800&q=80",
+      bg: placement1,
     },
     {
       title: "Training & Development",
       text: "Enhance your technical and professional skills through structured training programs led by industry experts.",
       icon: <FaChalkboardTeacher />,
-      bg: "https://images.unsplash.com/photo-1573497019417-d7f7f2337b99?auto=format&fit=crop&w=800&q=80",
+      bg: placement2,
     },
     {
       title: "Interview & Soft Skills",
       text: "Gain confidence, improve communication, and perform effectively in interviews.",
       icon: <FaUserGraduate />,
-      bg: "https://images.unsplash.com/photo-1596495577886-d920f1fb75e7?auto=format&fit=crop&w=800&q=80",
+      bg: placement3,
     },
     {
       title: "Corporate Training",
       text: "Customized corporate programs designed to upskill your workforce and align with company goals.",
       icon: <FaBuilding />,
-      bg: "https://images.unsplash.com/photo-1581092160612-9c9b4d2a7e29?auto=format&fit=crop&w=800&q=80",
+      bg: placement4,
     },
     {
       title: "IT Job-Oriented Courses",
       text: "We offer specialized courses in Full Stack, MERN, Python, .NET, Cloud, and Data Analytics.",
       icon: <FaLaptopCode />,
-      bg: "https://images.unsplash.com/photo-1581092580493-6110e9b15e7b?auto=format&fit=crop&w=800&q=80",
+      bg: placement2,
     },
   ];
 
   const highlights = [
     {
-      img: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      img: placement1,
       title: "100% Placement Assistance",
       subtitle: "We ensure every candidate gets placement guidance.",
     },
     {
-      img: "https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      img: placement2,
       title: "Career Growth",
       subtitle: "Boost your career with hands-on training.",
     },
     {
-      img: "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      img: placement3,
       title: "Interview Prep",
       subtitle: "Mock interviews & soft skill sessions included.",
     },
     {
-      img: "https://images.pexels.com/photos/3182830/pexels-photo-3182830.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      img: placement4,
       title: "Expert Guidance",
       subtitle: "Learn from industry professionals.",
     },
@@ -85,13 +89,12 @@ export default function OurServices({ setActiveSection }) {
 
   const reputationData = [
     { institute: "ProCoder Infosystem", rating: 95 },
-    { institute: "Other Institute", rating: 85 },
-    { institute: "Other Institute", rating: 80 },
-    { institute: "Other Institute", rating: 75 },
-    { institute: "Other Institute", rating: 70 },
+    { institute: "Other Institute 1", rating: 85 },
+    { institute: "Other Institute 2", rating: 80 },
+    { institute: "Other Institute 3", rating: 75 },
+    { institute: "Other Institute 4", rating: 70 },
   ];
 
-  // Function to navigate to contact section
   const scrollToContact = () => {
     if (setActiveSection) {
       setActiveSection("contact");
@@ -103,8 +106,7 @@ export default function OurServices({ setActiveSection }) {
     <div
       className="services-page relative overflow-hidden"
       style={{
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1920&q=80')",
+        backgroundImage: `url(${servicesbg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -185,50 +187,34 @@ export default function OurServices({ setActiveSection }) {
           Highlights
         </motion.h2>
 
-        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[1500px] mx-auto">
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[1500px] mx-auto">
           {highlights.map((item, idx) => (
             <motion.div
               key={idx}
-              className="relative bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer group"
-              whileHover={{ scale: 1.05 }}
+              className="relative group w-full h-60 rounded-2xl overflow-hidden shadow-xl border border-gray-200"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              onMouseEnter={() => setHoveredIndex(idx)}
-              onMouseLeave={() => setHoveredIndex(null)}
+              whileHover={{ scale: 1.05 }}
             >
-              {/* Image Container */}
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-
-                {/* Text overlay that appears at bottom on hover */}
-                <div
-                  className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white transform transition-all duration-300 ${
-                    hoveredIndex === idx
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-4 opacity-0"
-                  }`}
-                >
-                  <p className="text-sm opacity-90">{item.subtitle}</p>
+              <img
+                src={item.img}
+                alt={item.title}
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end">
+                <div className="p-4 text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                  <p className="text-sm text-gray-200">{item.subtitle}</p>
                 </div>
               </div>
-
-              {/* Title below image - always visible */}
-              <div className="p-4 text-center">
-                <h3 className="text-lg font-bold text-blue-900 mb-1">
-                  {item.title}
-                </h3>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* Reputation Graph Section */}
+      {/* Reputation Section */}
       <section className="relative bg-white py-16 px-6">
         <motion.h2
           className="text-3xl md:text-4xl font-bold text-center mb-16 text-blue-900"
@@ -257,7 +243,7 @@ export default function OurServices({ setActiveSection }) {
         </div>
       </section>
 
-      {/* White Slogan Section */}
+      {/* Slogan Section */}
       <section className="relative bg-white py-32 px-6 overflow-hidden">
         <motion.div
           className="max-w-3xl mx-auto bg-gradient-to-r from-blue-100 via-white to-blue-100 rounded-3xl p-12 text-center shadow-2xl relative z-10"
@@ -275,7 +261,7 @@ export default function OurServices({ setActiveSection }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-blue-600 text-white font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300"
-            onClick={scrollToContact} // Add onClick handler here
+            onClick={scrollToContact}
           >
             Enroll Now
           </motion.button>
@@ -294,7 +280,7 @@ export default function OurServices({ setActiveSection }) {
         </motion.h2>
 
         <div className="grid gap-12 md:gap-16 lg:gap-20 grid-cols-1 md:grid-cols-2 max-w-[1200px] mx-auto">
-          {/* Vision Card */}
+          {/* Vision */}
           <motion.div
             className="relative bg-white rounded-3xl p-10 shadow-2xl border-t-4 border-blue-600 overflow-hidden cursor-pointer"
             initial={{ opacity: 0, y: 50 }}
@@ -322,7 +308,7 @@ export default function OurServices({ setActiveSection }) {
             </div>
           </motion.div>
 
-          {/* Mission Card */}
+          {/* Mission */}
           <motion.div
             className="relative bg-white rounded-3xl p-10 shadow-2xl border-t-4 border-blue-600 overflow-hidden cursor-pointer"
             initial={{ opacity: 0, y: 50 }}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -15,13 +15,17 @@ import {
   FaCertificate,
 } from "react-icons/fa";
 
-export default function PlacementSupport({ setActiveSection }) {
-  // Add setActiveSection prop here
+// Local images
+import placementheading from "../assets/placementheading.jpeg";
+import placement1 from "../assets/placement1.jpeg";
+import placement2 from "../assets/placement2.jpeg";
+import placement3 from "../assets/placement3.jpeg";
+import placement4 from "../assets/placement4.jpeg";
+
+export default function Placement({ setActiveSection }) {
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
   }, []);
-
-  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const steps = [
     { title: "Registration & Career Counselling", icon: <FaClipboardList /> },
@@ -34,22 +38,22 @@ export default function PlacementSupport({ setActiveSection }) {
 
   const highlights = [
     {
-      img: "https://images.pexels.com/photos/3184312/pexels-photo-3184312.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      img: placement1,
       title: "Smart Career Guidance",
       subtitle: "Tailored support for every step of your journey.",
     },
     {
-      img: "https://images.pexels.com/photos/3184638/pexels-photo-3184638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      img: placement2,
       title: "Professional Skills",
       subtitle: "Develop the expertise companies are looking for.",
     },
     {
-      img: "https://images.pexels.com/photos/3182783/pexels-photo-3182783.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      img: placement3,
       title: "Confidence Boost",
       subtitle: "Mock interviews and soft skill training included.",
     },
     {
-      img: "https://images.pexels.com/photos/3184315/pexels-photo-3184315.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      img: placement4,
       title: "Expert Mentorship",
       subtitle: "Learn directly from experienced industry professionals.",
     },
@@ -94,8 +98,7 @@ export default function PlacementSupport({ setActiveSection }) {
       <section
         className="min-h-[70vh] flex flex-col justify-center items-center text-center px-10 relative overflow-hidden text-white"
         style={{
-          backgroundImage:
-            "url('https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
+          backgroundImage: `url(${placementheading})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -156,7 +159,7 @@ export default function PlacementSupport({ setActiveSection }) {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Features of Our ProCoder Infosystem
+          Features of Our Placement Program
         </motion.h2>
 
         <div className="max-w-[1500px] mx-auto space-y-6">
@@ -182,7 +185,7 @@ export default function PlacementSupport({ setActiveSection }) {
         </div>
       </section>
 
-      {/* White Slogan Section */}
+      {/* White Slogan + Highlights */}
       <section className="relative bg-white py-20 px-6 overflow-hidden">
         <motion.div
           className="max-w-3xl mx-auto bg-gradient-to-r from-blue-100 via-white to-blue-100 rounded-3xl p-10 text-center shadow-2xl relative z-10"
@@ -191,74 +194,47 @@ export default function PlacementSupport({ setActiveSection }) {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-3 text-blue-900">
-            "Supporting Your Career Every Step!"
+            "Empowering Your Career Journey!"
           </h2>
           <p className="text-gray-700 mb-6 text-lg">
-            Take the first step towards your dream IT job with our expert
-            guidance.
+            Take the first step toward success — with our full placement support
+            and expert mentorship.
           </p>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-300"
-            onClick={scrollToContact} // Add onClick handler here
+            onClick={scrollToContact}
           >
             Enroll Now
           </motion.button>
         </motion.div>
 
-        {/* Highlights Grid with Title Below Image */}
-        <div className="max-w-[1500px] mx-auto mt-12">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold text-center mb-12 text-blue-900"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            Why Choose Our Placement Support?
-          </motion.h2>
+        {/* Highlights Grid */}
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-[1500px] mx-auto mt-12">
+          {highlights.map((item, idx) => (
+            <motion.div
+              key={idx}
+              className="relative w-full h-52 rounded-lg overflow-hidden shadow-lg cursor-pointer group"
+              whileHover={{ scale: 1.05 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: idx * 0.05 }}
+            >
+              <img
+                src={item.img}
+                alt={item.title}
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+              />
 
-          <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {highlights.map((item, idx) => (
-              <motion.div
-                key={idx}
-                className="relative bg-white rounded-xl shadow-lg overflow-hidden cursor-pointer group"
-                whileHover={{ scale: 1.05 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: idx * 0.05 }}
-                onMouseEnter={() => setHoveredIndex(idx)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                {/* Image Container */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-
-                  {/* Text overlay that appears at bottom on hover */}
-                  <div
-                    className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white transform transition-all duration-300 ${
-                      hoveredIndex === idx
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-4 opacity-0"
-                    }`}
-                  >
-                    <p className="text-sm opacity-90">{item.subtitle}</p>
-                  </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end">
+                <div className="p-4 text-white transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
+                  <h3 className="text-lg font-bold">{item.title}</h3>
+                  <p className="text-sm text-gray-200">{item.subtitle}</p>
                 </div>
-
-                {/* Title below image - always visible */}
-                <div className="p-4 text-center">
-                  <h3 className="text-lg font-bold text-blue-900 mb-1">
-                    {item.title}
-                  </h3>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
     </div>

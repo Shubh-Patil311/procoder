@@ -571,6 +571,12 @@
 // export default Home;
 import React from "react";
 import { motion } from "framer-motion";
+import HeroBg from "../assets/HeroBgPic.avif";
+import ModernDev from "../assets/Modern-dev.avif";
+import webTech from "../assets/web-tech.avif";
+import teamCollab from "../assets/team-collab.avif";
+import projectBased from "../assets/Project-base-learning.avif";
+
 import {
   FaCode,
   FaLaptopCode,
@@ -621,25 +627,25 @@ const Home = ({ setActiveSection }) => {
   // Coding-related images with unique descriptions
   const codingImages = [
     {
-      url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      url: ModernDev,
       title: "Modern Development",
       description: "Advanced coding environments with latest tools",
       icon: FaCode,
     },
     {
-      url: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      url: webTech,
       title: "Web Technologies",
       description: "Full-stack development training programs",
       icon: FaLaptopCode,
     },
     {
-      url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+      url: teamCollab,
       title: "Team Collaboration",
       description: "Collaborative learning and group projects",
       icon: FaUsers,
     },
     {
-      url: "https://images.unsplash.com/photo-1534665482403-a909d0d97c67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      url: projectBased,
       title: "Project Based Learning",
       description: "Real-world projects and hands-on experience",
       icon: FaRocket,

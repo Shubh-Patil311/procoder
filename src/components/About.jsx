@@ -672,6 +672,13 @@
 // export default About;
 import React from "react";
 import { motion } from "framer-motion";
+import modernDev from "../assets/Modern-dev.avif";
+import teamCollab from "../assets/team-collab.avif";
+import webTech from "../assets/web-tech-2.avif";
+import mobileApp from "../assets/mobile-app.avif";
+import dataAnalytics from "../assets/Data-Analytics.avif";
+import codeMastery from "../assets/code-mastery.avif";
+
 import { useInView } from "react-intersection-observer";
 import {
   FaRocket,
@@ -762,10 +769,10 @@ const About = ({ setActiveSection }) => {
     },
   ];
 
-  // Coding-related images data with icons
+  // Coding-related images data with icons (using imported local files)
   const codingImages = [
     {
-      url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      url: modernDev,
       alt: "Coding Environment",
       title: "Modern Development",
       description: "Advanced coding environments",
@@ -773,7 +780,7 @@ const About = ({ setActiveSection }) => {
       color: "from-blue-500 to-cyan-500",
     },
     {
-      url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+      url: teamCollab,
       alt: "Team Collaboration",
       title: "Team Projects",
       description: "Collaborative learning sessions",
@@ -781,7 +788,7 @@ const About = ({ setActiveSection }) => {
       color: "from-green-500 to-emerald-500",
     },
     {
-      url: "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80",
+      url: webTech,
       alt: "Web Development",
       title: "Web Technologies",
       description: "Full-stack development training",
@@ -789,7 +796,7 @@ const About = ({ setActiveSection }) => {
       color: "from-purple-500 to-pink-500",
     },
     {
-      url: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      url: mobileApp,
       alt: "Mobile Development",
       title: "Mobile Apps",
       description: "iOS & Android development",
@@ -797,7 +804,7 @@ const About = ({ setActiveSection }) => {
       color: "from-orange-500 to-red-500",
     },
     {
-      url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      url: dataAnalytics,
       alt: "Data Science",
       title: "Data Analytics",
       description: "Data science and AI programs",
@@ -805,7 +812,7 @@ const About = ({ setActiveSection }) => {
       color: "from-indigo-500 to-blue-500",
     },
     {
-      url: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
+      url: codeMastery,
       alt: "Programming",
       title: "Code Mastery",
       description: "Master programming fundamentals",
